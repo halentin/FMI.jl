@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Export Bouncing Ball · FMI.jl</title><meta name="title" content="Export Bouncing Ball · FMI.jl"/><meta property="og:title" content="Export Bouncing Ball · FMI.jl"/><meta property="twitter:title" content="Export Bouncing Ball · FMI.jl"/><meta name="description" content="Documentation for FMI.jl."/><meta property="og:description" content="Documentation for FMI.jl."/><meta property="twitter:description" content="Documentation for FMI.jl."/><script data-outdated-warner src="../../../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../../../assets/documenter.js"></script><script src="../../../search_index.js"></script><script src="../../../siteinfo.js"></script><script src="../../../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../../../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../../../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><a class="docs-logo" href="../../../"><img src="../../../assets/logo.png" alt="FMI.jl logo"/></a><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../../../">Introduction</a></li><li><a class="tocitem" href="../../../features/">Features</a></li><li><a class="tocitem" href="../../../faq/">FAQ</a></li><li><input class="collapse-toggle" id="menuitem-4" type="checkbox" checked/><label class="tocitem" for="menuitem-4"><span class="docs-label">Examples</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../overview/">Overview</a></li><li><a class="tocitem" href="../../simulate/">Simulate</a></li><li><a class="tocitem" href="../../parameterize/">Parameterize</a></li><li><a class="tocitem" href="../../inputs/">Inputs</a></li><li><a class="tocitem" href="../../multiple_instances/">Multiple instances</a></li><li><a class="tocitem" href="../../modelica_conference_2021/">Modelica conference 2021</a></li><li><a class="tocitem" href="../../manipulation/">Manipulation</a></li><li><a class="tocitem" href="../../multithreading/">Multithreading</a></li><li><a class="tocitem" href="../../multiprocessing/">Multiprocessing</a></li><li><a class="tocitem" href="../../workshops/">Pluto Workshops</a></li><li><input class="collapse-toggle" id="menuitem-4-11" type="checkbox" checked/><label class="tocitem" for="menuitem-4-11"><span class="docs-label">FMIExport Examples</span><i class="docs-chevron"></i></label><ul class="collapsed"><li class="is-active"><a class="tocitem" href>Export Bouncing Ball</a><ul class="internal"><li><a class="tocitem" href="#License"><span>License</span></a></li><li><a class="tocitem" href="#Introduction"><span>Introduction</span></a></li><li><a class="tocitem" href="#Getting-started"><span>Getting started</span></a></li><li><a class="tocitem" href="#Building-the-FMU"><span>Building the FMU</span></a></li><li><a class="tocitem" href="#Simulate-the-FMU"><span>Simulate the FMU</span></a></li><li><a class="tocitem" href="#Getting-started-with-custom-project"><span>Getting started with custom project</span></a></li></ul></li></ul></li></ul></li><li><a class="tocitem" href="../../../library/">User Level API - FMI.jl</a></li><li><input class="collapse-toggle" id="menuitem-6" type="checkbox"/><label class="tocitem" for="menuitem-6"><span class="docs-label">Developer Level API</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><input class="collapse-toggle" id="menuitem-6-1" type="checkbox"/><label class="tocitem" for="menuitem-6-1"><span class="docs-label">fmi version independent content</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../fmi_lowlevel_library_constants/">Types in FMI Import/Core .jl</a></li><li><a class="tocitem" href="../../../fmi_lowlevel_modeldescription_functions/">Working with the FMI model description</a></li><li><a class="tocitem" href="../../../fmi_lowlevel_library_functions/">Functions in FMI Import/Core .jl</a></li></ul></li><li><input class="collapse-toggle" id="menuitem-6-2" type="checkbox"/><label class="tocitem" for="menuitem-6-2"><span class="docs-label">FMI2 specific content</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../fmi2_lowlevel_library_constants/">FMI2 Types in FMI Import/Core .jl</a></li><li><input class="collapse-toggle" id="menuitem-6-2-2" type="checkbox"/><label class="tocitem" for="menuitem-6-2-2"><span class="docs-label">FMI2 Functions in FMI Import/Core .jl</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../fmi2_lowlevel_modeldescription_functions/">Working with the FMI model description</a></li><li><a class="tocitem" href="../../../fmi2_lowlevel_library_functions/">FMI Common Concepts for Model Exchange and Co-Simulation</a></li><li><a class="tocitem" href="../../../fmi2_lowlevel_ME_functions/">FMI for Model Exchange</a></li><li><a class="tocitem" href="../../../fmi2_lowlevel_CS_functions/">FMI for Co-Simulation</a></li></ul></li></ul></li><li><input class="collapse-toggle" id="menuitem-6-3" type="checkbox"/><label class="tocitem" for="menuitem-6-3"><span class="docs-label">FMI3 specific content</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../fmi3_lowlevel_library_constants/">FMI3 Types in FMI Import/Core .jl</a></li><li><input class="collapse-toggle" id="menuitem-6-3-2" type="checkbox"/><label class="tocitem" for="menuitem-6-3-2"><span class="docs-label">FMI3 Functions in FMI Import/Core .jl</span><i class="docs-chevron"></i></label><ul class="collapsed"><li><a class="tocitem" href="../../../fmi3_lowlevel_modeldescription_functions/">Working with the FMI model description</a></li><li><a class="tocitem" href="../../../fmi3_lowlevel_library_functions/">FMI Common Concepts for Model Exchange and Co-Simulation</a></li><li><a class="tocitem" href="../../../fmi3_lowlevel_ME_functions/">FMI for Model Exchange</a></li><li><a class="tocitem" href="../../../fmi3_lowlevel_CS_functions/">FMI for Co-Simulation</a></li><li><a class="tocitem" href="../../../fmi3_lowlevel_SE_functions/">FMI for Scheduled Execution</a></li></ul></li></ul></li></ul></li><li><a class="tocitem" href="../../../index_library/">API Index</a></li><li><a class="tocitem" href="../../../fmi-tool-info/">FMI Tool Information</a></li><li><a class="tocitem" href="../../../related/">Related Publication</a></li><li><a class="tocitem" href="../../../contents/">Contents</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Examples</a></li><li><a class="is-disabled">FMIExport Examples</a></li><li class="is-active"><a href>Export Bouncing Ball</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Export Bouncing Ball</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/halentin/FMI.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Create-a-FMU"><a class="docs-heading-anchor" href="#Create-a-FMU">Create a FMU</a><a id="Create-a-FMU-1"></a><a class="docs-heading-anchor-permalink" href="#Create-a-FMU" title="Permalink"></a></h1><p>at the example of the well-known <em>bouncing ball</em></p><p>Tutorial by Tobias Thummerer, Simon Exner | Last edit: February 2025</p><p>🚧 This is still WIP and we add additional information and description, soon! 🚧</p><h2 id="License"><a class="docs-heading-anchor" href="#License">License</a><a id="License-1"></a><a class="docs-heading-anchor-permalink" href="#License" title="Permalink"></a></h2><pre><code class="language-julia hljs">#
+# Copyright (c) 2021 Tobias Thummerer, Lars Mikelsons
+# Licensed under the MIT license. See LICENSE file in the project root for details.
+#</code></pre><h2 id="Introduction"><a class="docs-heading-anchor" href="#Introduction">Introduction</a><a id="Introduction-1"></a><a class="docs-heading-anchor-permalink" href="#Introduction" title="Permalink"></a></h2><p>This Julia Package FMIExport.jl enables the export of simulation models from Julia code. The FMI (Functional Mock-up Interface) is a free standard (<a href="https://fmi-standard.org">fmi-standard.org</a>) that defines a <em>model container</em> and an interface to exchange simulation models using a combination of XML files, binaries and C code zipped into a single file. The magic on the Julia side happens by compiling Julia code to a DLL (Windows) or LIB (Linux) by using the <em>PackageCompiler.jl</em>, therefore a <em>package</em> is defined to be compiled - instead of just a single file. This is very important to keep in mind.</p><h2 id="Getting-started"><a class="docs-heading-anchor" href="#Getting-started">Getting started</a><a id="Getting-started-1"></a><a class="docs-heading-anchor-permalink" href="#Getting-started" title="Permalink"></a></h2><p>To allow for editing the example, you can make a copy of the examples folder. In case you just want to lean back and enjoy the magic, you can proceed by just <em>opening</em> the bouncing ball example. </p><p>In the creation of the FMU, an entire package is involved. However, the things that need to be defined by you can happen within only a single file. In case of the bouncing ball, this file is <a href="https://github.com/ThummeTo/FMIExport.jl/blob/main/examples/FMI2/BouncingBall/src/BouncingBall.jl">BouncingBall.jl</a>. If we have a look inside, we find many interesting things, that we investigate in detail now. The code in the following only investigates <em>snippets</em>, for full running code see the <a href="https://github.com/ThummeTo/FMIExport.jl/blob/main/examples/">examples folder</a>.</p><p>We start by loading the library.</p><pre><code class="language-julia hljs">using FMIExport
+using FMIExport.FMIBase.FMICore: fmi2True, fmi2False, fmi2Integer</code></pre><p>Further, we define a start state and initial parameters.</p><pre><code class="language-julia hljs"># a minimum height to reset the ball after event
+EPS = 1e-8
+
+# ball position, velocity (initial)
+DEFAULT_X0 = [1.0, 0.0]
+# ball mass, ball radius, ball collision damping, ball minimum velocity, gravity constant 
+DEFAULT_PARAMS = [1.0, 0.1, 0.9, 1e-3, 9.81]</code></pre><pre><code class="nohighlight hljs">5-element Vector{Float64}:
+ 1.0
+ 0.1
+ 0.9
+ 0.001
+ 9.81</code></pre><h3 id="Initialization-function"><a class="docs-heading-anchor" href="#Initialization-function">Initialization function</a><a id="Initialization-function-1"></a><a class="docs-heading-anchor-permalink" href="#Initialization-function" title="Permalink"></a></h3><p>For solving IVPs (initial value problems), we require an <em>inital value</em> - for ODEs, this is the initial state. Therefore, we define a function, that computes (or just returns) a start state to start the algorithm for numerical integration to obtain a solution.</p><pre><code class="language-julia hljs">FMU_FCT_INIT = function()
+   
+    sticking = fmi2False
+    counter = fmi2Integer(0)
+
+    s = DEFAULT_X0[1]         # ball position
+    v = DEFAULT_X0[2]         # ball velocity
+    a = 0.0                   # ball acceleration
+
+    t = 0.0        
+    x_c = [s, v]      
+    ẋ_c = [v, a]
+    x_d = [sticking, counter]
+    u = []
+    p = DEFAULT_PARAMS
+
+    return (t, x_c, ẋ_c, x_d, u, p)
+end</code></pre><pre><code class="nohighlight hljs">#1 (generic function with 1 method)</code></pre><h3 id="Function-for-the-right-hand-side"><a class="docs-heading-anchor" href="#Function-for-the-right-hand-side">Function for the right-hand side</a><a id="Function-for-the-right-hand-side-1"></a><a class="docs-heading-anchor-permalink" href="#Function-for-the-right-hand-side" title="Permalink"></a></h3><p>After we defined start values for the integration, we need to define what is actually integrated. For ODEs, this is refered to as the <em>right-hand side</em>, a function, that defines derivatives that are numerically integrated by the ODE solver.</p><pre><code class="language-julia hljs">FMU_FCT_EVALUATE = function(t, x_c, ẋ_c, x_d, u, p, eventMode)
+    m, r, d, v_min, g = p
+    s, v = x_c
+    sticking, counter = x_d
+    _, a = ẋ_c
+
+    if sticking == fmi2True
+        a = 0.0
+    elseif sticking == fmi2False
+
+        if eventMode
+            h = s-r
+            if h &lt;= 0 &amp;&amp; v &lt; 0
+                s = r + EPS # so that indicator is not triggered again
+                v = -v*d 
+                counter = fmi2Integer(counter+1)
+
+                # stop bouncing to prevent high frequency bouncing (and maybe tunneling the floor)
+                if abs(v) &lt; v_min
+                    sticking = fmi2True
+                    v = 0.0
+                end
+            end
+        end
+
+        a = (m * -g) / m     # the system&#39;s physical equation (a little longer than necessary)
+    else
+        @error &quot;Unknown value for `sticking` == $(sticking).&quot;
+        return (x_c, ẋ_c, x_d, p)
+    end
+
+    # Todo: Remove these allocations. Make it inplace.
+    x_c = [s, v]
+    ẋ_c = [v, a]
+    x_d = [sticking, counter]
+    p = [m, r, d, v_min, g]
+
+    return (x_c, ẋ_c, x_d, p)
+end</code></pre><pre><code class="nohighlight hljs">#3 (generic function with 1 method)</code></pre><h3 id="Event-indicator-function"><a class="docs-heading-anchor" href="#Event-indicator-function">Event indicator function</a><a id="Event-indicator-function-1"></a><a class="docs-heading-anchor-permalink" href="#Event-indicator-function" title="Permalink"></a></h3><p>We defined what happens if we collide with the ground, but we need a way to tell the solver <em>when exactly</em> this is the case - so a mathematical definition of the collision. This happens within the <em>event indicator</em>: Whenever we have a real zero crossing within the event indicator, the solver (or the event finding routine within) searches for the exact event location and pauses the integration process here. After the event is handled (and the ball velocity changed), the numerical integration resumes with the new state.</p><pre><code class="language-julia hljs">FMU_FCT_EVENT = function(t, x_c, ẋ_c, x_d, u, p)
+    m, r, d, v_min, g = p
+    s, v = x_c
+    _, a = ẋ_c
+    sticking, counter = x_d
+
+    # helpers
+    z1 = 0.0 # first event indicator
+    h = s-r # ball height
+
+    if sticking == fmi2True
+        z1 = 1.0            # event 1: ball stay-on-ground
+    else
+        if h &gt; -EPS &amp;&amp; h &lt;= 0 &amp;&amp; v &gt; 0
+            z1 = -EPS
+        else 
+            z1 = h
+        end
+    end
+
+    z = [z1]
+
+    return z
+end</code></pre><pre><code class="nohighlight hljs">#5 (generic function with 1 method)</code></pre><h3 id="Output-function"><a class="docs-heading-anchor" href="#Output-function">Output function</a><a id="Output-function-1"></a><a class="docs-heading-anchor-permalink" href="#Output-function" title="Permalink"></a></h3><p>Finally, we can define <em>outputs</em> that are exposed to the user. In FMI, in theory, we could investigate all quantities we are interested in (if not explicitly hidden by the FMU), however it makes sense to define or calculate application specific outputs. In this case, we just return the ball position and velocity.</p><pre><code class="language-julia hljs">FMU_FCT_OUTPUT = function(t, x_c, ẋ_c, x_d, u, p)
+    m, r, d, v_min, g = p
+    s, v = x_c
+    _, a = ẋ_c
+    sticking, counter = x_d
+
+    y = [s, v]
+
+    return y
+end</code></pre><pre><code class="nohighlight hljs">#7 (generic function with 1 method)</code></pre><h3 id="FMU-constructor"><a class="docs-heading-anchor" href="#FMU-constructor">FMU constructor</a><a id="FMU-constructor-1"></a><a class="docs-heading-anchor-permalink" href="#FMU-constructor" title="Permalink"></a></h3><p>After defining the mathematical behavior for our FMU, we need to define a constructor - so a function that is called if the FMU is loaded. Within, we define all the variables we want to be part of the <em>model description</em>, technically a XML that exposes the model structure and variables. This XML is parsed by importing tools to simulate FMUs appropriately and to provide helpful information.</p><pre><code class="language-julia hljs">FMIBUILD_CONSTRUCTOR = function(resPath=&quot;&quot;)
+    fmu = fmi2CreateSimple(initializationFct=FMU_FCT_INIT,
+                        evaluationFct=FMU_FCT_EVALUATE,
+                        outputFct=FMU_FCT_OUTPUT,
+                        eventFct=FMU_FCT_EVENT)
+
+    fmu.modelDescription.modelName = &quot;BouncingBall&quot;
+
+    # modes 
+    fmi2ModelDescriptionAddModelExchange(fmu.modelDescription, &quot;BouncingBall&quot;)
+
+    # states [2]
+    fmi2AddStateAndDerivative(fmu, &quot;ball.s&quot;; stateStart=DEFAULT_X0[1], stateDescr=&quot;Absolute position of ball center of mass&quot;, derivativeDescr=&quot;Absolute velocity of ball center of mass&quot;)
+    fmi2AddStateAndDerivative(fmu, &quot;ball.v&quot;; stateStart=DEFAULT_X0[2], stateDescr=&quot;Absolute velocity of ball center of mass&quot;, derivativeDescr=&quot;Absolute acceleration of ball center of mass&quot;)
+
+    # discrete state [2]
+    fmi2AddIntegerDiscreteState(fmu, &quot;sticking&quot;; description=&quot;Indicator (boolean) if the mass is sticking on the ground, as soon as abs(v) &lt; v_min&quot;)
+    fmi2AddIntegerDiscreteState(fmu, &quot;counter&quot;; description=&quot;Number of collision with the floor.&quot;)
+
+    # outputs [2]
+    fmi2AddRealOutput(fmu, &quot;ball.s_out&quot;; description=&quot;Absolute position of ball center of mass&quot;)
+    fmi2AddRealOutput(fmu, &quot;ball.v_out&quot;; description=&quot;Absolute velocity of ball center of mass&quot;)
+
+    # parameters [5]
+    fmi2AddRealParameter(fmu, &quot;m&quot;;     start=DEFAULT_PARAMS[1], description=&quot;Mass of ball&quot;)
+    fmi2AddRealParameter(fmu, &quot;r&quot;;     start=DEFAULT_PARAMS[2], description=&quot;Radius of ball&quot;)
+    fmi2AddRealParameter(fmu, &quot;d&quot;;     start=DEFAULT_PARAMS[3], description=&quot;Collision damping constant (velocity fraction after hitting the ground)&quot;)
+    fmi2AddRealParameter(fmu, &quot;v_min&quot;; start=DEFAULT_PARAMS[4], description=&quot;Minimal ball velocity to enter on-ground-state&quot;)
+    fmi2AddRealParameter(fmu, &quot;g&quot;;     start=DEFAULT_PARAMS[5], description=&quot;Gravity constant&quot;)
+
+    fmi2AddEventIndicator(fmu)
+
+    return fmu
+end</code></pre><pre><code class="nohighlight hljs">#9 (generic function with 2 methods)</code></pre><h2 id="Building-the-FMU"><a class="docs-heading-anchor" href="#Building-the-FMU">Building the FMU</a><a id="Building-the-FMU-1"></a><a class="docs-heading-anchor-permalink" href="#Building-the-FMU" title="Permalink"></a></h2><p>The compilation process for the FMU is triggered by the following lines. Keep in mind, that the entire package is compiled to an FMU. If we trigger the building process within this package, we would create a FMU that compiles FMU... this sounds cool at first glance, but is not what we want in most cases. Therefore, the build command itself <code>saveFMU</code> is within a formatted block, starting with <code>### FMIBUILD_NO_EXPORT_BEGIN ###</code> and ending with <code>### FMIBUILD_NO_EXPORT_END ###</code>. All text between these delimiters is automatically removed <em>before</em> building of the package happens. This way, the actual building package <code>FMIBuild</code> and the build command are excluded from the final FMU. Alternatively, one could trigger the build process from outside the package, e.g. by working in the REPL directly. The command <code>saveFMU</code> is commented out, to not start a building process within this notebook - this must be included in your application of course.</p><pre><code class="language-julia hljs">### FMIBUILD_NO_EXPORT_BEGIN ###
+# The line above is a start-marker for excluded code for the FMU compilation process!
+
+tmpDir = mktempdir(; prefix=&quot;fmibuildjl_test_&quot;, cleanup=false) 
+@info &quot;Saving example files at: $(tmpDir)&quot;
+fmu_save_path = joinpath(tmpDir, &quot;BouncingBall.fmu&quot;)  
+
+fmu = FMIBUILD_CONSTRUCTOR()
+using FMIBuild: saveFMU                    # &lt;= this must be excluded during export, because FMIBuild cannot execute itself (but it is able to build)
+# saveFMU(fmu, fmu_save_path; debug=true, compress=false)    # &lt;= this must be excluded during export, because saveFMU would start an infinite build loop with itself (debug=true allows debug messages, but is slow during execution!)
+
+# The following line is a end-marker for excluded code for the FMU compilation process!
+### FMIBUILD_NO_EXPORT_END ###</code></pre><pre><code class="nohighlight hljs">[36m[1m[ [22m[39m[36m[1mInfo: [22m[39mSaving example files at: C:\Users\RUNNER~1\AppData\Local\Temp\fmibuildjl_test_k74v8R</code></pre><h2 id="Simulate-the-FMU"><a class="docs-heading-anchor" href="#Simulate-the-FMU">Simulate the FMU</a><a id="Simulate-the-FMU-1"></a><a class="docs-heading-anchor-permalink" href="#Simulate-the-FMU" title="Permalink"></a></h2><p>FMUs exported and compiled with Julia <strong>can not</strong> be executed within Julia. This sounds wired, but comes from the fact that only a single Julia instance (sysimage) is allowed to run for each Julia process. However, you can use FMUs from Julia within any other tool that supports FMI, of course.</p><p>Interestingly, there is actually no need to <em>compile</em> a FMU if you want to use it within Julia anyway - you can just use the current copy within the memory with <em>FMI.jl</em>, see the following lines.</p><pre><code class="language-julia hljs">using FMI, DifferentialEquations
+fmu.executionConfig.loggingOn = true
+solution = simulate(fmu, (0.0, 3.0); recordValues=[&quot;sticking&quot;, &quot;counter&quot;])
+
+using Plots
+plot(solution)</code></pre><pre><code class="nohighlight hljs">[33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mfmi2Instantiate!(...): This component was already registered. This may be because you created the FMU by yourself with FMIExport.jl.
+[33m[1m└ [22m[39m[90m@ FMIBase C:\Users\runneradmin\.julia\packages\FMIBase\fSdVN\src\printing.jl:30[39m
+
+
+[34mSimulating ME-FMU ...   0%|█                             |  ETA: N/A[39m
+
+[34mSimulating ME-FMU ... 100%|██████████████████████████████| Time: 0:00:13[39m
+
+
+[33m[1m┌ [22m[39m[33m[1mWarning: [22m[39mUnknown instance at Ptr{Nothing} @0x000001e261a3aed0.
+[33m[1m└ [22m[39m[90m@ FMIExport D:\a\FMIExport.jl\FMIExport.jl\src\FMI2_simple.jl:40[39m
+
+
+[32m[1mPrecompiling[22m[39m packages...
+
+
+    730.8 ms[32m  ✓ [39m[90mAccessors → TestExt[39m
+
+
+   3038.0 ms[32m  ✓ [39m[90mFMIBase → PlotsExt[39m
+  2 dependencies successfully precompiled in 6 seconds. 250 already precompiled.</code></pre><h2 id="Getting-started-with-custom-project"><a class="docs-heading-anchor" href="#Getting-started-with-custom-project">Getting started with custom project</a><a id="Getting-started-with-custom-project-1"></a><a class="docs-heading-anchor-permalink" href="#Getting-started-with-custom-project" title="Permalink"></a></h2><p>The best way to start with your own project, is to make a <em>copy</em> of one of the example <em>folders</em>, for example the bouncing ball and edit it to fit you requirements. Because the entire package is compiled, you can control the size of the binary by adding or removing packages to the <em>Project.toml</em>. You can use <em>Pkg.jl</em> of course to manage dependencies. Then you can start overwriting the functions, that define the right-hand side of you FMU, events and event indicators and finally the output variables.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../../workshops/">« Pluto Workshops</a><a class="docs-footer-nextpage" href="../../../library/">User Level API - FMI.jl »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.14.1 on <span class="colophon-date" title="Wednesday 30 July 2025 20:02">Wednesday 30 July 2025</span>. Using Julia version 1.11.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
