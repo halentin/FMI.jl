@@ -74,8 +74,8 @@ info(fmu)
     	Var. naming conv.:		structured
     	Event indicators:		4
     	Inputs:				3
-
     
+
     		352321536 ["u_real"]
     		352321537 ["u_boolean"]
     		352321538 ["u_integer"]
@@ -139,7 +139,7 @@ c = fmi2Instantiate!(fmu; loggingOn=true)
 
     FMU:            IO
         InstanceName:   IO
-        Address:        Ptr{Nothing} @0x00000224d934a8b0
+        Address:        Ptr{Nothing} @0x0000014780babf20
         State:          0
         Logging:        true
         FMU time:       -Inf
@@ -258,7 +258,7 @@ paramsVal = generateRandomNumbers()
 
 
 
-    (49.9188362520649, false, 56, "Random number 96.17469398466207!")
+    (34.12440440831104, true, 51, "Random number 80.65318239742781!")
 
 
 
@@ -354,8 +354,8 @@ simData = simulate(c, (tStart, tStop); recordValues=params[1:3], saveat=tSave,
     	Save values: 0
     	Steps completed: 0
     Values [2]:
-    	0.0	(49.9188362520649, 0.0, 56.0)
-    	1.0	(49.9188362520649, 0.0, 56.0)
+    	0.0	(34.12440440831104, 1.0, 51.0)
+    	1.0	(34.12440440831104, 1.0, 51.0)
     Events [0]:
     
 
@@ -389,7 +389,7 @@ rndReal, rndBoolean, rndInteger, rndString = generateRandomNumbers()
 
 
 
-    (91.77447027175138, false, 58, "Random number 66.84598902329117!")
+    (77.88622170350666, true, 5, "Random number 10.578267746028347!")
 
 
 
@@ -475,8 +475,8 @@ simData = simulate(c, (tStart, tStop); recordValues=params[1:3], saveat=tSave,
     	Save values: 0
     	Steps completed: 0
     Values [2]:
-    	0.0	(91.77447027175138, 0.0, 58.0)
-    	1.0	(91.77447027175138, 0.0, 58.0)
+    	0.0	(77.88622170350666, 1.0, 5.0)
+    	1.0	(77.88622170350666, 1.0, 5.0)
     Events [0]:
     
 
