@@ -95,8 +95,8 @@ info(myFMU)
     	Var. naming conv.:		structured
     	Event indicators:		24
     	Inputs:				0
-    
 
+    
     	Outputs:			0
     	States:				2
     		33554432 ["mass.s"]
