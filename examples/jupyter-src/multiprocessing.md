@@ -13,7 +13,7 @@ Tutorial by Jonas Wilfert, Tobias Thummerer
 ```
 
 ## Motivation
-This Julia Package *FMI.jl* is motivated by the use of simulation models in Julia. Here the FMI specification is implemented. FMI (*Functional Mock-up Interface*) is a free standard ([fmi-standard.org](https://fmi-standard.org/)) that defines a container and an interface to exchange dynamic models using a combination of XML files, binaries and C code zipped into a single file. The user can thus use simulation models in the form of an FMU (*Functional Mock-up Units*). Besides loading the FMU, the user can also set values for parameters and states and simulate the FMU both as co-simulation and model exchange simulation.
+This Julia Package *FMI.jl* is motivated by the use of simulation models in Julia. Here the FMI specification is implemented. FMI (*Functional Mock-up Interface*) is a free standard ([fmi-standard.org](https://fmi-standard.org/)) that defines a container and an interface to exchange dynamic models using a combination of XML files, binaries and C code zipped into a single file. The user can thus use simulation models in the form of an FMU (*Functional Mock-up Unit*). Besides loading the FMU, the user can also set values for parameters and states and simulate the FMU both as co-simulation and model exchange simulation.
 
 ## Introduction to the example
 This example shows how to parallelize the computation of an FMU in FMI.jl. We can compute a batch of FMU-evaluations in parallel with different initial settings.
@@ -98,8 +98,13 @@ workers()
     Hello World!
     
 
-          From worker 2:	Hello World!
           From worker 3:	Hello World!
+
+    
+          From worker 2:	Hello World!
+
+    
+    
 
 ### Simulation setup
 
@@ -115,29 +120,26 @@ batchSize = 16
 input_values = collect(collect.(eachrow(rand(batchSize,2))))
 ```
 
-    
-    
-
 
 
 
     16-element Vector{Vector{Float64}}:
-     [0.009696807056509216, 0.6778367520771285]
-     [0.5370212481350242, 0.0007183481298560501]
-     [0.41653163989984043, 0.4557813239365678]
-     [0.15970748817932945, 0.791889741012676]
-     [0.6551918525652681, 0.926769173926472]
-     [0.7265915234384743, 0.9801646207062985]
-     [0.18199689793950002, 0.6907421440962896]
-     [0.236431706921024, 0.06878265693264396]
-     [0.42183932581963823, 0.2628533123520077]
-     [0.26607759471312953, 0.6673088237391005]
-     [0.07728198778984197, 0.5602402498176383]
-     [0.2005153465697297, 0.07550278387233678]
-     [0.9788578425554709, 0.2690444113153012]
-     [0.6773382018088272, 0.4284660707250316]
-     [0.20437717826741153, 0.75546228209433]
-     [0.38472032014344715, 0.5897575640964127]
+     [0.39553051939044925, 0.09939365543304324]
+     [0.44251471931948594, 0.5810598099115531]
+     [0.9149697254699485, 0.7699909346969548]
+     [0.3482575527261046, 0.010807002279675904]
+     [0.648057469868704, 0.4047497490651756]
+     [0.19008508216603415, 0.8647181519511674]
+     [0.7036155470899716, 0.2786337346162977]
+     [0.672843182840252, 0.4753606746989]
+     [0.32091234892305487, 0.7548162385263402]
+     [0.12375652067146248, 0.1715575472655383]
+     [0.3596730863661973, 0.34235589430329405]
+     [0.446374256748704, 0.0225399886527492]
+     [0.08574466595208252, 0.7040302218084035]
+     [0.4756550937641463, 0.9197401131666213]
+     [0.26682525800864865, 0.8834497008932044]
+     [0.7167938609415706, 0.7359174798749488]
 
 
 
@@ -160,7 +162,7 @@ For Distributed we need to embed the FMU into its own `module`. This prevents Di
 end
 ```
 
-We define a helper function to calculate the FMU and combine it into an Matrix.
+We define a helper function to calculate the FMU and combine it into a matrix.
 
 
 ```julia
@@ -180,16 +182,16 @@ Running a single evaluation is pretty quick, therefore the speed can be better t
 
 
 
-    BenchmarkTools.Trial: 2 samples with 1 evaluation per sample.
-     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.507 s[22m[39m … [35m  2.548 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.58% … 1.18%
-     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.527 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.88%
-     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.527 s[22m[39m ± [32m28.587 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.88% ± 0.42%
+    BenchmarkTools.Trial: 3 samples with 1 evaluation per sample.
+     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.113 s[22m[39m … [35m  2.224 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.44% … 1.02%
+     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.119 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.44%
+     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.152 s[22m[39m ± [32m62.086 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.62% ± 0.35%
     
-      [34m█[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
-      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
-      2.51 s[90m         Histogram: frequency by time[39m        2.55 s [0m[1m<[22m
+      [34m█[39m[39m [39m [39m█[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
+      [34m█[39m[39m▁[39m▁[39m█[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
+      2.11 s[90m         Histogram: frequency by time[39m        2.22 s [0m[1m<[22m
     
-     Memory estimate[90m: [39m[33m300.74 MiB[39m, allocs estimate[90m: [39m[33m7802418[39m.
+     Memory estimate[90m: [39m[33m296.15 MiB[39m, allocs estimate[90m: [39m[33m4101765[39m.
 
 
 
@@ -209,13 +211,13 @@ println("Single Threaded")
 
 
     BenchmarkTools.Trial: 1 sample with 1 evaluation per sample.
-     Single result which took [34m40.374 s[39m (0.63% GC) to evaluate,
-     with a memory estimate of [33m4.70 GiB[39m, over [33m124838676[39m allocations.
+     Single result which took [34m35.052 s[39m (0.41% GC) to evaluate,
+     with a memory estimate of [33m4.63 GiB[39m, over [33m65628228[39m allocations.
 
 
 
 ### Multithreaded Batch Execution
-In a multithreaded context we have to provide each thread it's own fmu, as they are not thread safe.
+In a multithreaded context we have to provide each thread its own FMU, as they are not thread safe.
 To spread the execution of a function to multiple processes, the function `pmap` can be used.
 
 
@@ -233,8 +235,8 @@ println("Multi Threaded")
 
 
     BenchmarkTools.Trial: 1 sample with 1 evaluation per sample.
-     Single result which took [34m22.879 s[39m (0.00% GC) to evaluate,
-     with a memory estimate of [33m95.92 KiB[39m, over [33m1460[39m allocations.
+     Single result which took [34m21.073 s[39m (0.00% GC) to evaluate,
+     with a memory estimate of [33m133.50 KiB[39m, over [33m2671[39m allocations.
 
 
 
@@ -251,4 +253,4 @@ After calculating the data, the FMU is unloaded and all unpacked data on disc is
 
 ### Summary
 
-In this tutorial it is shown how multi processing with `Distributed.jl` can be used to improve the performance for calculating a Batch of FMUs.
+In this tutorial it is shown how multiprocessing with `Distributed.jl` can be used to improve the performance for calculating a batch of FMUs.
