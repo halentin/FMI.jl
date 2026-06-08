@@ -13,7 +13,7 @@ Tutorial by Jonas Wilfert, Tobias Thummerer
 ```
 
 ## Motivation
-This Julia Package *FMI.jl* is motivated by the use of simulation models in Julia. Here the FMI specification is implemented. FMI (*Functional Mock-up Interface*) is a free standard ([fmi-standard.org](https://fmi-standard.org/)) that defines a container and an interface to exchange dynamic models using a combination of XML files, binaries and C code zipped into a single file. The user can thus use simulation models in the form of an FMU (*Functional Mock-up Units*). Besides loading the FMU, the user can also set values for parameters and states and simulate the FMU both as co-simulation and model exchange simulation.
+This Julia Package *FMI.jl* is motivated by the use of simulation models in Julia. Here the FMI specification is implemented. FMI (*Functional Mock-up Interface*) is a free standard ([fmi-standard.org](https://fmi-standard.org/)) that defines a container and an interface to exchange dynamic models using a combination of XML files, binaries and C code zipped into a single file. The user can thus use simulation models in the form of an FMU (*Functional Mock-up Unit*). Besides loading the FMU, the user can also set values for parameters and states and simulate the FMU both as co-simulation and model exchange simulation.
 
 ## Introduction to the example
 This example shows how to parallelize the computation of an FMU in FMI.jl. We can compute a batch of FMU-evaluations in parallel with different initial settings.
@@ -101,7 +101,7 @@ input_values = collect(collect.(eachrow(rand(batchSize,2))))
 
 
     1-element Vector{Vector{Float64}}:
-     [0.7154169610318252, 0.22955514828709533]
+     [0.8689947559188965, 0.03707824471314436]
 
 
 
@@ -125,7 +125,7 @@ realFMUBatch = [loadFMU("SpringPendulum1D", "Dymola", "2022x") for _ in 1:batchS
 
 
 
-We define a helper function to calculate the FMU solution and combine it into an Matrix.
+We define a helper function to calculate the FMU solution and combine it into a matrix.
 
 
 ```julia
@@ -153,15 +153,15 @@ Running a single evaluation is pretty quick, therefore the speed can be better t
 
 
     BenchmarkTools.Trial: 3 samples with 1 evaluation per sample.
-     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.470 s[22m[39m … [35m  2.489 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.49% … 0.98%
-     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.473 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.59%
-     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.477 s[22m[39m ± [32m10.017 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.69% ± 0.26%
+     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.133 s[22m[39m … [35m  2.161 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.34% … 0.39%
+     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.149 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.39%
+     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.148 s[22m[39m ± [32m14.226 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.57% ± 0.35%
     
-      [34m█[39m[39m [39m [39m [39m [39m [39m [39m█[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
-      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
-      2.47 s[90m         Histogram: frequency by time[39m        2.49 s [0m[1m<[22m
+      [34m█[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m█[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
+      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m█[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
+      2.13 s[90m         Histogram: frequency by time[39m        2.16 s [0m[1m<[22m
     
-     Memory estimate[90m: [39m[33m300.74 MiB[39m, allocs estimate[90m: [39m[33m7802418[39m.
+     Memory estimate[90m: [39m[33m296.15 MiB[39m, allocs estimate[90m: [39m[33m4101765[39m.
 
 
 
@@ -180,21 +180,21 @@ println("Single Threaded")
 
 
 
-    BenchmarkTools.Trial: 2 samples with 1 evaluation per sample.
-     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.496 s[22m[39m … [35m  2.518 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.50% … 0.61%
-     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.507 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.56%
-     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.507 s[22m[39m ± [32m14.860 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.56% ± 0.08%
+    BenchmarkTools.Trial: 3 samples with 1 evaluation per sample.
+     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.141 s[22m[39m … [35m  2.180 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.34% … 0.41%
+     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.155 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.41%
+     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.158 s[22m[39m ± [32m20.060 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.39% ± 0.04%
     
-      [34m█[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
-      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
-      2.5 s[90m          Histogram: frequency by time[39m        2.52 s [0m[1m<[22m
+      [34m█[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
+      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
+      2.14 s[90m         Histogram: frequency by time[39m        2.18 s [0m[1m<[22m
     
-     Memory estimate[90m: [39m[33m300.74 MiB[39m, allocs estimate[90m: [39m[33m7802421[39m.
+     Memory estimate[90m: [39m[33m296.15 MiB[39m, allocs estimate[90m: [39m[33m4101768[39m.
 
 
 
 ### Multithreaded Batch Execution
-In a multithreaded context we have to provide each thread it's own fmu, as they are not thread safe.
+In a multithreaded context we have to provide each thread its own FMU, as they are not thread safe.
 To spread the execution of a function to multiple threads, the library `Folds` can be used.
 
 
@@ -209,16 +209,16 @@ println("Multi Threaded")
 
 
 
-    BenchmarkTools.Trial: 2 samples with 1 evaluation per sample.
-     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.489 s[22m[39m … [35m  2.521 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.52% … 0.61%
-     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.505 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.57%
-     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.505 s[22m[39m ± [32m22.346 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.57% ± 0.06%
+    BenchmarkTools.Trial: 3 samples with 1 evaluation per sample.
+     Range [90m([39m[36m[1mmin[22m[39m … [35mmax[39m[90m):  [39m[36m[1m2.144 s[22m[39m … [35m  2.200 s[39m  [90m┊[39m GC [90m([39mmin … max[90m): [39m0.44% … 0.36%
+     Time  [90m([39m[34m[1mmedian[22m[39m[90m):     [39m[34m[1m2.159 s              [22m[39m[90m┊[39m GC [90m([39mmedian[90m):    [39m0.43%
+     Time  [90m([39m[32m[1mmean[22m[39m ± [32mσ[39m[90m):   [39m[32m[1m2.167 s[22m[39m ± [32m28.820 ms[39m  [90m┊[39m GC [90m([39mmean ± σ[90m):  [39m0.41% ± 0.04%
     
-      [34m█[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
-      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
-      2.49 s[90m         Histogram: frequency by time[39m        2.52 s [0m[1m<[22m
+      [34m█[39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m [39m [39m [39m [39m [39m [39m [32m [39m[39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m [39m█[39m [39m 
+      [34m█[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[32m▁[39m[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m▁[39m█[39m [39m▁
+      2.14 s[90m         Histogram: frequency by time[39m         2.2 s [0m[1m<[22m
     
-     Memory estimate[90m: [39m[33m300.74 MiB[39m, allocs estimate[90m: [39m[33m7802436[39m.
+     Memory estimate[90m: [39m[33m296.15 MiB[39m, allocs estimate[90m: [39m[33m4101783[39m.
 
 
 
@@ -244,4 +244,4 @@ unloadFMU.(realFMUBatch)
 
 ### Summary
 
-In this tutorial it is shown how multi threading with `Folds.jl` can be used to improve the performance for calculating a Batch of FMUs.
+In this tutorial it is shown how multithreading with `Folds.jl` can be used to improve the performance for calculating a batch of FMUs.
